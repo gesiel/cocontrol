@@ -1,5 +1,5 @@
 {
-	"name": "Braise Workspace",
+	"name": "Cocontrol Workspace",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "elixir",
 	"workspaceFolder": "/workspace",

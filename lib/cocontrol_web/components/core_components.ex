@@ -17,7 +17,7 @@ defmodule CocontrolWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import CocontrolWeb.Gettext
+  use Gettext, backend: CocontrolWeb.Gettext
 
   @doc """
   Renders a modal.
