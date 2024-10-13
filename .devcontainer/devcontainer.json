@@ -1,0 +1,54 @@
+{
+	"name": "Braise Workspace",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "elixir",
+	"workspaceFolder": "/workspace",
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+	],
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"jakebecker.elixir-ls",
+				"ms-azuretools.vscode-docker",
+				"phoenixframework.phoenix",
+				"editorconfig.editorconfig",
+				"eamodio.gitlens",
+				"mhutchie.git-graph"
+			],
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "zsh",
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "bash"
+					},
+					"zsh": {
+						"path": "zsh"
+					}
+				},
+				"emmet.includeLanguages": {
+					"phoenix-heex": "html"
+				}
+			}
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or with the host. 
+	"forwardPorts": [
+		4000,
+		4001,
+		5432
+	],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": ["mix deps.get"],
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+	"features": {
+		"ghcr.io/jungaretti/features/make:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/robbert229/devcontainer-features/postgresql-client:1": {}
+	}
+}
