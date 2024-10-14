@@ -12,7 +12,7 @@ config :cocontrol,
   generators: [timestamp_type: :utc_datetime]
 
 # Configures migrations to use binary id by default
-config :cocontrol, Braise.Repo, migration_primary_key: [type: :binary_id]
+config :cocontrol, Cocontrol.Repo, migration_primary_key: [type: :binary_id]
 
 # Configures the endpoint
 config :cocontrol, CocontrolWeb.Endpoint,
