@@ -38,7 +38,7 @@ defmodule Cocontrol.AuthTest do
   describe "get_user!/1" do
     test "raises if id is invalid" do
       assert_raise Ecto.NoResultsError, fn ->
-        Auth.get_user!(-1)
+        Auth.get_user!(Ecto.UUID.autogenerate())
       end
     end
 

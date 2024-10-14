@@ -68,6 +68,13 @@ defmodule CocontrolWeb.Router do
       on_mount: [{CocontrolWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      live "/orgs", OrganizationLive.Index, :index
+      live "/orgs/new", OrganizationLive.Index, :new
+      live "/orgs/:id/edit", OrganizationLive.Index, :edit
+
+      live "/orgs/:id", OrganizationLive.Show, :show
+      live "/orgs/:id/show/edit", OrganizationLive.Show, :edit
     end
   end
 
