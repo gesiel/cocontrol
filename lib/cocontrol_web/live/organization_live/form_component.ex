@@ -41,12 +41,25 @@ defmodule CocontrolWeb.OrganizationLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"organization" => organization_params}, socket) do
-    changeset = Organizations.change_organization(socket.assigns.organization, organization_params)
+    user = socket.assigns.user
+
+    changeset =
+      Organizations.change_organization(
+        socket.assigns.organization,
+        Map.put(organization_params, "user_id", user.id)
+      )
+
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
   def handle_event("save", %{"organization" => organization_params}, socket) do
-    save_organization(socket, socket.assigns.action, organization_params)
+    user = socket.assigns.user
+
+    save_organization(
+      socket,
+      socket.assigns.action,
+      Map.put(organization_params, "user_id", user.id)
+    )
   end
 
   defp save_organization(socket, :edit, organization_params) do
