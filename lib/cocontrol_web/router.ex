@@ -75,6 +75,13 @@ defmodule CocontrolWeb.Router do
 
       live "/orgs/:id", OrganizationLive.Show, :show
       live "/orgs/:id/show/edit", OrganizationLive.Show, :edit
+
+      live "/accounts", AccountLive.Index, :index
+      live "/accounts/new", AccountLive.Index, :new
+      live "/accounts/:id/edit", AccountLive.Index, :edit
+
+      live "/accounts/:id", AccountLive.Show, :show
+      live "/accounts/:id/show/edit", AccountLive.Show, :edit
     end
   end
 

@@ -3,7 +3,7 @@ defmodule Cocontrol.Repo.Migrations.AddUserFkToOrgs do
 
   def change do
     alter table(:orgs) do
-      add :user_id, references(:users), null: false
+      add :user_id, references(:users, on_delete: :nothing), null: false
     end
 
     create index(:orgs, [:user_id])
