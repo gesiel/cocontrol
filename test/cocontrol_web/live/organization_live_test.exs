@@ -10,11 +10,12 @@ defmodule CocontrolWeb.OrganizationLiveTest do
   @invalid_attrs %{name: nil, document_number: nil}
 
   defp login_user(%{conn: conn}) do
-    %{conn: log_in_user(conn, user_fixture())}
+    user = user_fixture()
+    %{conn: log_in_user(conn, user), user: user}
   end
 
-  defp create_organization(%{conn: conn}) do
-    organization = organization_fixture()
+  defp create_organization(%{conn: conn, user: user}) do
+    organization = organization_fixture(%{user_id: user.id})
     %{conn: conn, organization: organization}
   end
 

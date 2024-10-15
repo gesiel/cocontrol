@@ -6,7 +6,8 @@ defmodule CocontrolWeb.OrganizationLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :orgs, Organizations.list_orgs())}
+    user = socket.assigns.current_user
+    {:ok, stream(socket, :orgs, Organizations.list_orgs(user.id))}
   end
 
   @impl true
@@ -15,9 +16,11 @@ defmodule CocontrolWeb.OrganizationLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
+    user = socket.assigns.current_user
+
     socket
     |> assign(:page_title, "Edit Organization")
-    |> assign(:organization, Organizations.get_organization!(id))
+    |> assign(:organization, Organizations.get_organization!(id, user.id))
   end
 
   defp apply_action(socket, :new, _params) do
@@ -39,7 +42,8 @@ defmodule CocontrolWeb.OrganizationLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    organization = Organizations.get_organization!(id)
+    user = socket.assigns.current_user
+    organization = Organizations.get_organization!(id, user.id)
     {:ok, _} = Organizations.delete_organization(organization)
 
     {:noreply, stream_delete(socket, :orgs, organization)}

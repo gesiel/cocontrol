@@ -9,16 +9,16 @@ defmodule Cocontrol.Organizations do
   alias Cocontrol.Organizations.Organization
 
   @doc """
-  Returns the list of orgs.
+  Returns the list of orgs for the given user id.
 
   ## Examples
 
-      iex> list_orgs()
+      iex> list_orgs(1)
       [%Organization{}, ...]
 
   """
-  def list_orgs do
-    Repo.all(Organization)
+  def list_orgs(user_id) do
+    Repo.all(from o in Organization, where: o.user_id == ^user_id)
   end
 
   @doc """
@@ -36,6 +36,22 @@ defmodule Cocontrol.Organizations do
 
   """
   def get_organization!(id), do: Repo.get!(Organization, id)
+
+  @doc """
+  Gets a single organization by id for the given user id.
+
+  Raises `Ecto.NoResultsError` if the Organization does not exist.
+
+  ## Examples
+
+      iex> get_organization!(123)
+      %Organization{}
+
+      iex> get_organization!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_organization!(id, user_id), do: Repo.get_by!(Organization, id: id, user_id: user_id)
 
   @doc """
   Creates a organization.
